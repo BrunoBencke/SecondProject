@@ -7,7 +7,8 @@ package secondproject;
 
 /**
  *
- * @author User
+ * @author bruno.bencke
+ * @author gabriel.frantz
  */
 public class SecondProject {
 
