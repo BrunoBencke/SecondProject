@@ -1,67 +1,99 @@
 package secondproject;
 
-public class Reviews {
-    private static int totalScore; // total de reviews deste ano
-    private static float scorePhr; // percentual de mediocre do ano
-    private static float mediaScores; // media dos scores(notas)
-    private static float desvioPadraoScores; //desvio padrão populacional dos scores
-    private static String bestGame; // um dos jogos com maior score
-    private static String worstGame; // um dos jogos com pior score
-    private static int countGenreAction;// contador jogos de acao deste ano
+import java.util.TreeMap;
 
-    public static int getTotalScore() {
+public class Reviews {
+    private TreeMap<String, Integer> reviews;
+    private TreeMap<String, Integer> plataforma;
+    private int review;
+    private Double score;
+    private Double scoreTo2;
+    private Double totalScore;
+    private Game bestGame;
+    private Game worstGame;
+
+    public Reviews(String reviews, Double totalScore, Game bestGame, Game worstGame) {
+        this.setReviews(reviews);
+        this.review++;
+        this.totalScore += totalScore;
+        this.bestGame = bestGame;
+        this.worstGame = worstGame;
+    }
+
+    public Reviews() {
+
+    }
+
+    public TreeMap<String, Integer> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(String review) {
+        if (this.reviews.containsKey(review)) {
+            this.reviews.put(review, (1 + reviews.get(review)));
+        } else {
+            this.reviews.put(review, 1);
+        }
+
+    }
+
+    public int getReview() {
+        return review;
+    }
+
+    public void setReview() {
+        this.review++;
+    }
+
+    public Double getTotalScore() {
         return totalScore;
     }
 
-    public static void setTotalScore(int aTotalScore) {
-        totalScore = aTotalScore;
+    public void setTotalScore(Double totalScore) {
+        this.totalScore = totalScore;
     }
 
-    public static float getScorePhr() {
-        return scorePhr;
-    }
-
-    public static void setScorePhr(float aScorePhr) {
-        scorePhr = aScorePhr;
-    }
-
-    public static float getMediaScores() {
-        return mediaScores;
-    }
-
-    public static void setMediaScores(float aMediaScores) {
-        mediaScores = aMediaScores;
-    }
-
-    public static float getDesvioPadraoScores() {
-        return desvioPadraoScores;
-    }
-
-    public static void setDesvioPadraoScores(float aDesvioPadraoScores) {
-        desvioPadraoScores = aDesvioPadraoScores;
-    }
-
-    public static String getBestGame() {
+    public Game getBestGame() {
         return bestGame;
     }
 
-    public static void setBestGame(String aBestGame) {
-        bestGame = aBestGame;
+    public void setBestGame(Game bestGame) {
+        this.bestGame.setPosicaoScore('+', bestGame);
     }
 
-    public static String getWorstGame() {
+    public Game getWorstGame() {
         return worstGame;
     }
 
-    public static void setWorstGame(String aWorstGame) {
-        worstGame = aWorstGame;
+    public void setWorstGame(Game worstGame) {
+        this.worstGame.setPosicaoScore('-', worstGame);
     }
 
-    public static int getCountGenreAction() {
-        return countGenreAction;
+    public Double getScoreTo2() {
+        return scoreTo2;
     }
 
-    public static void setCountGenreAction(int aCountGenreAction) {
-        countGenreAction = aCountGenreAction;
+    public void setReviewTo2(int scoreTo2) {
+        this.scoreTo2 += Math.pow(scoreTo2, 2);
+    }
+
+    public TreeMap<String, Integer> getPlataforma() {
+        return plataforma;
+    }
+
+    public void setPlataforma(String plataforma) {
+        if (this.plataforma.containsKey(plataforma)) {
+            this.plataforma.put(plataforma, this.plataforma.get(plataforma) + 1);
+        } else {
+            this.plataforma.put(plataforma, 1);
+        }
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 }
