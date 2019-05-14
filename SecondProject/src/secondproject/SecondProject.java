@@ -57,7 +57,7 @@ public class SecondProject {
         fileReader.close();
 
         totalReviewsPorAno(dictionary);
-        totalReviewsCriterio(dictionary, "2012");
+        totalReviewsCriterio(dictionary, "2016");
         percentualReviewVsAll(dictionary, "Mediocre");
 
         System.out.println("\nMédia dos Score = " + mediaScore(dictionary));
@@ -92,16 +92,16 @@ public class SecondProject {
     }
 
     public static void totalReviewsPorAno(TreeMap<String, GamesOfYear> table) {
-        System.out.println("\n\tNumero de reviews por ano");
+        System.out.println("\nNÚMERO DE REVIEWS EM CADA ANO: ");
         int cont = 0;
         for (String k : table.keySet()) {
             cont++;
-            System.out.println(cont + "\t" + k + " = " + table.get(k).getGames().size());
+            System.out.println(cont + ". " + k + " = " + table.get(k).getGames().size() + " reviews");
         }
     }
 
     public static void totalReviewsCriterio(TreeMap<String, GamesOfYear> table, String criterio) {
-        System.out.println("\n\tNumero de '" + criterio + "'reviews");
+        System.out.println("\nNÚMERO DE '" + criterio + "' REVIEWS: ");
         int cont = 0;
         for (String k : table.keySet()) {
             for (int i = 0; i < table.get(k).getGames().size(); i++) {
@@ -110,11 +110,11 @@ public class SecondProject {
                 }
             }
         }
-        System.out.println("Resultado:\t" + criterio + " = " + cont);
+        System.out.println("Resultado: " + criterio + " = " + cont + " reviews");
     }
 
     public static void percentualReviewVsAll(TreeMap<String, GamesOfYear> table, String criterio) {
-        System.out.println("\n\tPercentual de '" + criterio + "'");
+        System.out.println("\nPERCENTUAL DE '" + criterio + "': ");
         int cont = 0;
         int all = 0;
         for (String k : table.keySet()) {
@@ -127,7 +127,7 @@ public class SecondProject {
         }
 
         Double percentual = (cont * (100.0 / all));
-        System.out.println("Resultado:\t" + criterio + " = " + percentual + " %");
+        System.out.println("Resultado: " + criterio + " = " + percentual + "%");
 
     }
 
@@ -145,7 +145,7 @@ public class SecondProject {
     }
 
     public static void desvioPadrao(TreeMap<String, GamesOfYear> table) {
-        System.out.println("\n\tDesvio padrão dos Scores:");
+        System.out.println("\nDESVIO PADRÃO DOS SCORES: ");
         ArrayList<Double> v = new ArrayList();
         Double media = mediaScore(table);
         Double temp;
@@ -162,11 +162,11 @@ public class SecondProject {
 
         variancia = variancia / (v.size() - 1);
 
-        System.out.println("Desvio Padrão = \t" + Math.sqrt(variancia));
+        System.out.println("Desvio Padrão = " + Math.sqrt(variancia));
     }
 
     public static void bestAndWorstGame(TreeMap<String, GamesOfYear> table) {
-        System.out.println("\n\tMelhor e Pior Jogo:");
+        System.out.println("\nMELHOR JOGO E PIOR JOGO:");
         Game bestGame = new Game();
         bestGame.setScore(0.0);
         Game worstGame = new Game();
@@ -179,8 +179,8 @@ public class SecondProject {
             }
         }
 
-        System.out.println("Melhor jogo =>\t" + bestGame.getTitle() + " - " + bestGame.getPlatform() + " - " + bestGame.getScore());
-        System.out.println("Pior Jogo   =>\t" + worstGame.getTitle() + " - " + worstGame.getPlatform() + " - " + worstGame.getScore());
+        System.out.println("Melhor Jogo: " + bestGame.getTitle() + "\nPlataforma: " + bestGame.getPlatform() + "\nScore:" + bestGame.getScore()+"\n");
+        System.out.println("Pior Jogo: " + worstGame.getTitle() + "\nPlataforma: " + worstGame.getPlatform() + "\nScore:" + worstGame.getScore());
 
     }
 }
