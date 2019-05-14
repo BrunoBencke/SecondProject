@@ -1,7 +1,7 @@
 package secondproject;
 
 public class Game {
-    
+
     private String title;
     private String platform;
     private String score_phrase;
@@ -21,15 +21,15 @@ public class Game {
     }
 
     public Game() {
-    
+
     }
-    
+
     public Game(Game game) {
         populaGame(game);
     }
-    
+
     private void populaGame(Game game) {
-        this.title = game.getTitulo();
+        this.title = game.getTitle();
         this.platform = game.getPlatform();
         this.score_phrase = game.getScore_phrase();
         this.score = game.getScore();
@@ -38,12 +38,25 @@ public class Game {
         this.release_year = game.getRelease_year();
     }
 
+    public void setPosicaoScore(char sinal, Game game) {
+        if (sinal == '+') {
+            if (game.getScore() > this.getScore()) {
+                this.populaGame(game);
+            }
+        } else if (sinal == '-') {
+            if (game.getScore() < this.getScore()) {
+                this.populaGame(game);
+            }
+        } else {
+            System.out.println("Sinal Inválido!");
+        }
+    }
 
-    public String getTitulo() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitulo(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -55,42 +68,20 @@ public class Game {
         this.platform = platform;
     }
 
-    public Double getScore() {
-        return score;
-    }
-
-    public void setScore(Double score) {
-        this.score = score;
-    }
-  
-    public void setPosicaoScore(char sinal, Game game){
-        if(sinal == '+'){            
-            if(game.getScore() > this.getScore()){
-                this.populaGame(game);
-            }            
-        } else if ( sinal == '-' ) {            
-            if(game.getScore() < this.getScore()){
-                this.populaGame(game);
-            }            
-        } else {
-            System.out.println("Sinal Inválido!");
-        }
-    }
-    
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getScore_phrase() {
         return score_phrase;
     }
 
     public void setScore_phrase(String score_phrase) {
         this.score_phrase = score_phrase;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 
     public String getGenre() {
@@ -116,5 +107,4 @@ public class Game {
     public void setRelease_year(String release_year) {
         this.release_year = release_year;
     }
-    
 }
