@@ -15,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -57,12 +56,14 @@ public class SecondProject {
         fileReader.close();
 
         totalReviewsPorAno(dictionary);
-        totalReviewsCriterio(dictionary, "2016");
+        
         percentualReviewVsAll(dictionary, "Mediocre");
 
-        System.out.println("\nMédia dos Score = " + mediaScore(dictionary));
+        System.out.println("\nMédia dos Scores = " + mediaScore(dictionary));
         desvioPadrao(dictionary);
         bestAndWorstGame(dictionary);
+        
+        totalReviewsGenero(dictionary, "Action");
     }
 
     public static void calculoQuestao() {
@@ -100,17 +101,37 @@ public class SecondProject {
         }
     }
 
-    public static void totalReviewsCriterio(TreeMap<String, GamesOfYear> table, String criterio) {
-        System.out.println("\nNÚMERO DE '" + criterio + "' REVIEWS: ");
+    public static void maiorLancamentoGenero(TreeMap<String, GamesOfYear> table, String criterio) {
         int cont = 0;
         for (String k : table.keySet()) {
             for (int i = 0; i < table.get(k).getGames().size(); i++) {
-                if (table.get(k).getGames().get(i).getScore_phrase().equals(criterio)) {
+                if (table.get(k).getGames().get(i).getGenre().equals(criterio)) {
                     cont++;
                 }
             }
         }
-        System.out.println("Resultado: " + criterio + " = " + cont + " reviews");
+        System.out.println("Jogos no Genero: " + criterio + " = " + cont + " No ano de ");
+    }
+
+    public static void totalReviewsGenero(TreeMap<String, GamesOfYear> table, String criterio) {
+        System.out.println("\nNÚMERO DE '" + criterio + "' REVIEWS: ");
+        int cont = 0;
+        int temp = 0;
+        String ano = null;
+        String anoTemp = null;
+        do{
+        for (String k : table.keySet()) {
+            for (int i = 0; i < table.get(k).getGames().size(); i++) {
+                if (table.get(k).getGames().get(i).getGenre().equals(criterio)) {                    
+                    cont++;
+                    ano = table.get(k).getGames().get(i).getRelease_year();
+                }
+            }
+        }
+        ano = anoTemp;
+        cont = temp;
+        } while(cont > temp);
+        System.out.println("Resultado: " + criterio + " = " + cont + " reviews" + anoTemp);
     }
 
     public static void percentualReviewVsAll(TreeMap<String, GamesOfYear> table, String criterio) {

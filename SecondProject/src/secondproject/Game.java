@@ -9,6 +9,7 @@ public class Game {
     private String genre;
     private String editors_choice;
     private String release_year;
+    private String review;
 
     public Game(String title, String platform, String score_phrase, Double score, String genre, String editors_choice, String release_year) {
         this.title = title;
@@ -106,5 +107,13 @@ public class Game {
 
     public void setRelease_year(String release_year) {
         this.release_year = release_year;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 }
