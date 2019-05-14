@@ -55,6 +55,14 @@ public class SecondProject {
             linha = br.readLine();
         }
         fileReader.close();
+
+        totalReviewsPorAno(dictionary);
+        totalReviewsCriterio(dictionary, "2012");
+        percentualReviewVsAll(dictionary, "Mediocre");
+
+        System.out.println("\nMédia dos Score = " + mediaScore(dictionary));
+        desvioPadrao(dictionary);
+        bestAndWorstGame(dictionary);
     }
 
     public static void calculoQuestao() {
@@ -74,7 +82,6 @@ public class SecondProject {
         game.setTitle(array[0]);
         game.setPlatform(array[1]);
         game.setScore_phrase(array[2]);
-        System.out.println(array[3]);
         game.setScore(Double.parseDouble(array[3]));
         game.setGenre(array[4]);
         game.setEditors_choice(array[5]);
