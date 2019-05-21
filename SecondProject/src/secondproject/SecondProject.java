@@ -17,6 +17,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -35,6 +36,47 @@ public class SecondProject {
         String s = br.readLine();
         Map<Integer, Reviews> map = new TreeMap<Integer, Reviews>();
         while (s != null) {
+            String[] vets = s.split(";");
+            String nome = vets[0];
+            String avaliacao = vets[2];
+            Double score = Double.parseDouble(vets[3]);
+            String genero = vets[4];
+            int ano = Integer.parseInt(vets[6]);
+            Reviews control = null;
+            if (!map.containsKey(ano)) {
+                control = new Reviews(score, nome);
+            } else {
+                control = map.get(ano);
+            }
+            control.contReview();
+            control.contMediocres(avaliacao);
+            control.score(score);
+            control.bestGame(score, nome);
+            control.worstGame(score, nome);
+            control.addScore(score);
+            control.addAction(genero, nome);
+            control.addGame(nome, score);
+            map.put(ano, control);
+            s = br.readLine();
         }
+        Set<Integer> anos = map.keySet();
+        int qtdAction = 0;
+        int AnoAction = 0;
+        for (int ano : anos) {
+            System.out.println("\n");
+            System.out.println("Ano: " + ano);
+            System.out.println("Número de reviews: " + map.get(ano).reviews + "");
+            System.out.println("Percentual de 'Mediocre': " + map.get(ano).mediocres + " : " + map.get(ano).percentualMediocre());
+            System.out.println("Média aritmética: " + map.get(ano).mediaScore() + "");
+            System.out.println("Desvio padrão: " + map.get(ano).desvioPadrao());
+            System.out.println("Melhor jogo: " + map.get(ano).bestGame + ": " + map.get(ano).bestScore);
+            System.out.println("Pior jogo: " + map.get(ano).worstGame + ": " + map.get(ano).worstScore);
+            if (map.get(ano).contAction > qtdAction) {
+                qtdAction = map.get(ano).contAction;
+                AnoAction = ano;
+            }
+        }
+        System.out.println("");
+        System.out.println("Ano em que foi lançado um maior número de jogos do gênero ‘Action’: " + AnoAction);
     }
 }
