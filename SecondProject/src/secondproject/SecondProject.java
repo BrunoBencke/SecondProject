@@ -47,6 +47,14 @@ public class SecondProject {
                 games = dictionary.get(rowExcel[6]);
                 //coloca o item no dicionario
                 dictionary.put(rowExcel[6], popular(games, rowExcel));
+
+                totalReviewsPorAno(dictionary);
+
+                percentualReviewVsAll(dictionary, "Mediocre");
+
+                System.out.println("\nMédia dos Scores = " + mediaScore(dictionary));
+                desvioPadrao(dictionary);
+
             } else {
                 //coloca o item em um novo dicionario
                 dictionary.put(rowExcel[6], popular(games, rowExcel));
@@ -54,15 +62,7 @@ public class SecondProject {
             linha = br.readLine();
         }
         fileReader.close();
-
-        totalReviewsPorAno(dictionary);
-        
-        percentualReviewVsAll(dictionary, "Mediocre");
-
-        System.out.println("\nMédia dos Scores = " + mediaScore(dictionary));
-        desvioPadrao(dictionary);
         bestAndWorstGame(dictionary);
-        
         totalReviewsGenero(dictionary, "Action");
     }
 
@@ -119,18 +119,18 @@ public class SecondProject {
         int temp = 0;
         String ano = null;
         String anoTemp = null;
-        do{
-        for (String k : table.keySet()) {
-            for (int i = 0; i < table.get(k).getGames().size(); i++) {
-                if (table.get(k).getGames().get(i).getGenre().equals(criterio)) {                    
-                    cont++;
-                    ano = table.get(k).getGames().get(i).getRelease_year();
+        do {
+            for (String k : table.keySet()) {
+                for (int i = 0; i < table.get(k).getGames().size(); i++) {
+                    if (table.get(k).getGames().get(i).getGenre().equals(criterio)) {
+                        cont++;
+                        ano = table.get(k).getGames().get(i).getRelease_year();
+                    }
                 }
             }
-        }
-        ano = anoTemp;
-        cont = temp;
-        } while(cont > temp);
+            ano = anoTemp;
+            cont = temp;
+        } while (cont > temp);
         System.out.println("Resultado: " + criterio + " = " + cont + " reviews" + anoTemp);
     }
 
@@ -200,7 +200,7 @@ public class SecondProject {
             }
         }
 
-        System.out.println("Melhor Jogo: " + bestGame.getTitle() + "\nPlataforma: " + bestGame.getPlatform() + "\nScore:" + bestGame.getScore()+"\n");
+        System.out.println("Melhor Jogo: " + bestGame.getTitle() + "\nPlataforma: " + bestGame.getPlatform() + "\nScore:" + bestGame.getScore() + "\n");
         System.out.println("Pior Jogo: " + worstGame.getTitle() + "\nPlataforma: " + worstGame.getPlatform() + "\nScore:" + worstGame.getScore());
 
     }
